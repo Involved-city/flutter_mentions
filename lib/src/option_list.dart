@@ -7,6 +7,7 @@ class OptionList extends StatelessWidget {
     required this.suggestionListHeight,
     this.suggestionBuilder,
     this.suggestionListDecoration,
+    this.suggestionListMaxWidth = 300,
   });
 
   final Widget Function(Map<String, dynamic>)? suggestionBuilder;
@@ -19,6 +20,8 @@ class OptionList extends StatelessWidget {
 
   final BoxDecoration? suggestionListDecoration;
 
+  final double suggestionListMaxWidth;
+  
   @override
   Widget build(BuildContext context) {
     return data.isNotEmpty
@@ -27,6 +30,7 @@ class OptionList extends StatelessWidget {
                 suggestionListDecoration ?? BoxDecoration(color: Colors.white),
             constraints: BoxConstraints(
               maxHeight: suggestionListHeight,
+              maxWidth: suggestionListMaxWidth,
               minHeight: 0,
             ),
             child: ListView.builder(
