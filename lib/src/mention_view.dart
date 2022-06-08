@@ -51,10 +51,14 @@ class FlutterMentions extends StatefulWidget {
     this.hideSuggestionList = false,
     this.onSuggestionVisibleChanged,
     this.inputFormatters,
+    this.suggestionListMaxWidth = 300,
   }) : super(key: key);
 
   final bool hideSuggestionList;
 
+  /// list view container max width.
+  final double suggestionListMaxWidth;
+  
   /// input formatter param
   List<TextInputFormatter>? inputFormatters;
   
@@ -431,6 +435,7 @@ class FlutterMentionsState extends State<FlutterMentions> {
                     suggestionListHeight: widget.suggestionListHeight,
                     suggestionBuilder: list.suggestionBuilder,
                     suggestionListDecoration: widget.suggestionListDecoration,
+                    suggestionListMaxWidth: widget.suggestionListMaxWidth,
                     data: list.data.where((element) {
                       final ele = element['display'].toLowerCase();
                       final str = _selectedMention!.str
