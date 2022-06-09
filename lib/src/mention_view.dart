@@ -52,9 +52,25 @@ class FlutterMentions extends StatefulWidget {
     this.onSuggestionVisibleChanged,
     this.inputFormatters,
     this.suggestionListMaxWidth = 300,
+    this.isLoading = false,
+    this.loadingWidget = const SizedBox(),
+    this.loadingPopupHeight = 100,
+    this.loadingPopupWidth = 300,
   }) : super(key: key);
 
   final bool hideSuggestionList;
+  
+  /// loading widget
+  Widget loadingWidget;
+
+  /// set isloading 
+  bool isLoading = false;
+
+  /// loading dialog height
+  final double loadingPopupHeight;
+
+  /// loading dialog width
+  final double loadingPopupWidth;
 
   /// list view container max width.
   final double suggestionListMaxWidth;
@@ -431,7 +447,18 @@ class FlutterMentionsState extends State<FlutterMentions> {
           valueListenable: showSuggestions,
           builder: (BuildContext context, bool show, Widget? child) {
             return show && !widget.hideSuggestionList
-                ? OptionList(
+                ? widget.isLoading ?
+            Container(
+              decoration:
+              widget.suggestionListDecoration ??
+                  BoxDecoration(color: Colors.white),
+              constraints: BoxConstraints(
+                maxHeight: widget.loadingPopupHeight,
+                maxWidth: widget.loadingPopupWidth,
+                minHeight: 0,
+              ),
+              child: widget.loadingWidget,
+            ) : OptionList(
                     suggestionListHeight: widget.suggestionListHeight,
                     suggestionBuilder: list.suggestionBuilder,
                     suggestionListDecoration: widget.suggestionListDecoration,
