@@ -426,6 +426,11 @@ class FlutterMentionsState extends State<FlutterMentions> {
 
     controller!.mapping = mapToAnotation();
   }
+  
+  void setVisible(bool isShow) {
+    showSuggestions.value = isShow;
+  }
+
 
   @override
   Widget build(BuildContext context) {
